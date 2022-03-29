@@ -7,8 +7,7 @@ export let LOCALSTORAGE_TOKEN_KEY = "token";
 export function useFormInputs(initialvalue) {
   const [value, setValue] = useState(initialvalue);
   function onChange(e) {
-    console.log(e.target.value);
-    setValue(e.target.value);
+    setValue(e.target.value.trim());
   }
   return {
     value,

@@ -62,9 +62,10 @@ export const useProvideAuth = () => {
   };
   const createTask = async (body) => {
     let response = await addTask(body);
-    user.tasks.push(response.task);
-    setItemToLocal(LOCALSTORAGE_TOKEN_KEY, response.token);
-
+    if (response.success) {
+      user.tasks.push(response.task);
+      setItemToLocal(LOCALSTORAGE_TOKEN_KEY, response.token);
+    }
     return response;
   };
   const editTask = async (body, id) => {
@@ -91,8 +92,8 @@ export const useProvideAuth = () => {
     let response = await deleteTask1(id);
     if (response.success) {
       console.log(response);
-      setUser(response.user);
       setItemToLocal(LOCALSTORAGE_TOKEN_KEY, response.token);
+      setUser(response.user);
     }
     return response;
   };

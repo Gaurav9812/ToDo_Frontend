@@ -7,7 +7,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 function CreateTask() {
   const navigate = useNavigate();
   const title = useFormInputs("");
-  const description = useFormInputs("");
+  const [description, setDescription] = useState("");
   const startDate = useFormInputs("");
   const endDate = useFormInputs("");
   const [status, setStatus] = useState(false);
@@ -16,6 +16,10 @@ function CreateTask() {
   if (!auth.user) {
     return <Navigate to="/login" />;
   }
+  const onChangeDes = (e) => {
+    e.preventDefault();
+    setDescription(e.target.value);
+  };
   const handleSumbit = (e) => {
     e.preventDefault();
 
@@ -27,7 +31,7 @@ function CreateTask() {
     async function call() {
       let body = {
         title: title.value,
-        description: description.value,
+        description: description.trim(),
         startDate: startDate.value,
         endDate: endDate.value,
         status: status,
@@ -55,15 +59,20 @@ function CreateTask() {
   return (
     <div id={styles.outerContainer}>
       <h1>Add Task</h1>
-      <form>
+      <form onSubmit={handleSumbit}>
         <div className={styles.labFiel}>
           <label>Title</label>
-          <input type="text" maxLength={20} {...title} required />
+          <input type="text" maxLength={20} required {...title} />
         </div>
         <div className={styles.labFiel}>
           {" "}
           <label>Description</label>
-          <textarea maxLength={255} {...description} required />
+          <textarea
+            maxLength={255}
+            required
+            value={description}
+            onChange={onChangeDes}
+          />
         </div>
         <div className={styles.labFiel}>
           <label>Statues</label>{" "}
@@ -73,19 +82,14 @@ function CreateTask() {
         </div>
         <div className={styles.labFiel}>
           <label>Started At</label>
-          <input type="date" {...startDate} required />
+          <input type="date" required {...startDate} />
         </div>
         <div className={styles.labFiel}>
           <label>Finshed At</label>
-          <input type="date" {...endDate} required />
+          <input type="date" required {...endDate} />
         </div>
 
-        <input
-          type="submit"
-          value="ADD TASK"
-          id="submit"
-          onClick={handleSumbit}
-        />
+        <input type="submit" value="ADD TASK" id="submit" />
       </form>
     </div>
   );

@@ -43,28 +43,27 @@ function Signin() {
   return (
     <div className={styles.signup}>
       <h1>signin </h1>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <input
           className={styles.fields}
           type="text"
           placeholder="Username"
           maxLength={10}
-          {...username}
           required
+          {...username}
         />
         <input
           className={styles.fields}
           type="password"
           placeholder="password"
           maxLength={20}
-          {...password}
           required
+          {...password}
         />
         <input
           type="submit"
           value={loading ? "logging in" : "login"}
           className={styles.btn}
-          onClick={handleSubmit}
           disabled={loading}
         />
       </form>

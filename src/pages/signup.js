@@ -3,8 +3,10 @@ import { useFormInputs } from "../utils";
 import styles from "../styles/signup.module.css";
 import { useAuth } from "../hooks/index";
 import { Navigate, useNavigate } from "react-router-dom";
+import { useToasts } from "react-toast-notifications";
 
 function Signup() {
+  const { addToast } = useToasts();
   const auth = useAuth();
   const navigate = useNavigate();
   const username = useFormInputs("");
@@ -13,9 +15,21 @@ function Signup() {
   const phone = useFormInputs("");
   const sQuestion = useFormInputs("");
   const sAnswer = useFormInputs("");
-
+  const regEXPhone = /(0|91)?[7-9][0-9]{9}/;
+  const regEXEmail = /[A-Za-z0-9]+@gmail\.com/;
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!regEXPhone.test(phone.value)) {
+      return addToast("invalid Phone number", {
+        appearance: "error",
+      });
+    }
+    if (!regEXEmail.test(email.value)) {
+      return addToast("invalid Email", {
+        appearance: "error",
+      });
+    }
+
     let body = {
       username: username.value,
       password: password.value,
@@ -39,40 +53,40 @@ function Signup() {
   return (
     <div className={styles.signup}>
       <h1>Signup Form</h1>
-      <form className={styles.form}>
+      <form className={styles.form} onSubmit={handleSubmit}>
         <input
           type="text"
           placeholder="Username"
           maxLength={10}
           className={styles.fields}
-          {...username}
           required
+          {...username}
         />
         <input
           type="password"
           placeholder="Password"
           maxLength={20}
           className={styles.fields}
-          {...password}
           required
+          {...password}
         />
         <input
           type="email"
           placeholder="Email"
           maxLength={50}
           className={styles.fields}
-          {...email}
           required
+          {...email}
         />
         <input
           type="number"
           placeholder="Phonenumber"
           maxLength={11}
           className={styles.fields}
-          {...phone}
           required
+          {...phone}
         />
-        <select className={styles.fields} {...sQuestion} required>
+        <select className={styles.fields} required {...sQuestion}>
           <option value="" disabled selected>
             Choose one Security Question{" "}
           </option>
@@ -86,16 +100,10 @@ function Signup() {
           placeholder="Security Question Answer"
           maxLength={255}
           className={styles.fields}
+          required
           {...sAnswer}
-          required
         />
-        <input
-          type="submit"
-          value="Register"
-          className={styles.btn}
-          onClick={handleSubmit}
-          required
-        />
+        <input type="submit" value="Register" className={styles.btn} />
       </form>
     </div>
   );
