@@ -1,0 +1,54 @@
+#outerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif, monospace;
+}
+form {
+  width: 40%;
+}
+.labFiel {
+  display: flex;
+  margin: 1rem;
+  align-items: center;
+  justify-content: space-between;
+}
+.labFiel label {
+  font-size: 1.3rem;
+}
+#btn {
+  padding: 0.7rem 3rem;
+  border: 0;
+  background: red;
+  opacity: 0.5;
+}
+.labFiel input {
+  padding: 0.6rem;
+  width: 53%;
+  border-radius: 5px;
+  font-size: 1.2rem;
+}
+.labFiel textarea {
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: 2px solid red;
+  width: 55%;
+}
+
+#submit {
+  padding: 1rem 3rem;
+  border: 0px;
+  font-size: 1.2rem;
+  background: antiquewhite;
+  color: brown;
+}
+@media screen and (max-width: 500px) {
+  form {
+    width: 100%;
+  }
+}
+@media screen and (max-width: 1200px) {
+  form {
+    width: 80%;
+  }
+}

@@ -1,0 +1,39 @@
+#outerContainer {
+  padding-top: 1rem;
+  text-align: center;
+}
+.btn {
+  padding: 1rem 3rem;
+  border: 0;
+  background: black;
+  color: red;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 1rem;
+}
+#tableContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* text-align: center; */
+  width: 100%;
+}
+table {
+  width: 80%;
+  text-align: center;
+  border: 1px solid black;
+}
+
+th {
+  width: 14%;
+}
+@media screen and (max-width: 500px) {
+  table {
+    margin-left: 4rem;
+  }
+  #tableContainer {
+    overflow: scroll;
+  }
+}

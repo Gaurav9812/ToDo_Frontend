@@ -1,0 +1,26 @@
+.nav {
+  background: darkred;
+  padding: 1rem 8rem 1rem 4rem;
+  display: flex;
+  font-size: 1.5rem;
+  justify-content: space-between;
+  color: white;
+  font-family: sans-serif, monospace;
+  font-weight: 600;
+}
+.link {
+  color: white;
+  text-decoration: none;
+  margin: 1rem;
+  cursor: pointer;
+}
+@media screen and (max-width: 500px) {
+  .nav {
+    padding: 1rem;
+  }
+}
+@media screen and (max-width: 1200px) {
+  .nav {
+    padding: 1rem;
+  }
+}
